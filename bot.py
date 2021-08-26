@@ -40,6 +40,15 @@ async def reloadRoles(ctx):
         await ctx.guild.create_role(name="Finance", colour=discord.Colour(0x0062ff))
 
 @bot.command()
+async def newProject(ctx, projectName, *tags):
+    #Creates a text channel for the project
+    category = discord.utils.get(ctx.guild.categories, name='Projects')
+    guild = ctx.guild
+
+    await newChannel = ctx.guild.create_text_channel(f'Project-{projectName}', category=category)
+    await newChannel.set_permissions(ctx.guild.default_role, read_messages=False)
+
+@bot.command()
 async def addMember(ctx, target: discord.Member):
     #Adds a new member
     guild = ctx.guild
